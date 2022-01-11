@@ -1,0 +1,16 @@
+{
+    "name": "BckGmmn.App",
+    "rootNamespace": "BckGmmn.App",
+    "references": [
+        "GUID:7531149ad23075945ad150573c25e56c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
