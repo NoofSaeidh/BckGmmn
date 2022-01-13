@@ -1,6 +1,6 @@
 {
     "name": "BckGmmn.Editor",
-    "rootNamespace": "BckGmmn.Editor",
+    "rootNamespace": "BckGmmn",
     "references": [],
     "includePlatforms": [
         "Editor"

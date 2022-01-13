@@ -1,6 +1,6 @@
 {
     "name": "BckGmmn.App",
-    "rootNamespace": "BckGmmn.App",
+    "rootNamespace": "BckGmmn",
     "references": [
         "GUID:7531149ad23075945ad150573c25e56c"
     ],

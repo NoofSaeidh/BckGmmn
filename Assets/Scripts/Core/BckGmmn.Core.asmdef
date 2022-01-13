@@ -1,6 +1,6 @@
 {
     "name": "BckGmmn.Core",
-    "rootNamespace": "BckGmmn.Core",
+    "rootNamespace": "BckGmmn",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -10,5 +10,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": true
+    "noEngineReferences": false
 }
