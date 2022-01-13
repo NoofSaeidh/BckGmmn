@@ -2,10 +2,10 @@
 {
     public class Player : IPlayer
     {
-        public Player(IDiceSet diceSet)
+        public Player(IDice dice)
         {
-            DiceSet = diceSet;
+            Dice = dice;
         }
-        public IDiceSet DiceSet { get; }
+        public IDice Dice { get; }
     }
 }

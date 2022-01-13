@@ -2,23 +2,34 @@
 {
     public class Dice : IDice
     {
-        private readonly IDiceValueGenerator _generator;
-
-        public Dice(IDiceValueGenerator generator)
+        public Dice(IDie dice1, IDie dice2)
         {
-            _generator = generator;
+            Dice1 = dice1;
+            Dice2 = dice2;
         }
 
-        public DiceValue CurrentValue { get; private set; }
-
-        public DiceValue Roll()
+        public bool SupportDoubles()
         {
-            return CurrentValue = _generator.Next();
+            return true;
+        }
+
+        public bool IsDoublet()
+        {
+            return Dice1.CurrentValue == Dice2.CurrentValue;
+        }
+
+        public IDie Dice1 { get; }
+        public IDie Dice2 { get; }
+
+        public (Cast Cast1, Cast Cast2) Roll()
+        {
+            return (Dice1.Roll(), Dice2.Roll());
         }
 
         public void Reset()
         {
-            CurrentValue = default;
+            Dice1.Reset();
+            Dice2.Reset();
         }
     }
 }

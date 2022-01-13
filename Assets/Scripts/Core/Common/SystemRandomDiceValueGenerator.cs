@@ -6,7 +6,7 @@ namespace BckGmmn.Core.Common
     {
         private readonly Random _random = new ();
 
-        public DiceValue Next()
+        public Cast Next()
         {
             return new (_random.Next(1, 6));
         }

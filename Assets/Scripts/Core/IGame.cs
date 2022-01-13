@@ -6,8 +6,8 @@
         IPlayer PlayerB { get; }
         GameState GameState { get; }
         PlayerId Turn { get; set; }
-        PlayerId Winner { get; set; }
-
+        PlayerId Winner { get; }
+        IBoard Board { get; }
 
 
         // void Initialize();

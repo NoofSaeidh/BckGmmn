@@ -2,6 +2,6 @@
 {
     public interface IDiceValueGenerator
     {
-        DiceValue Next();
+        Cast Next();
     }
 }

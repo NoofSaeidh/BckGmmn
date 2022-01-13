@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BckGmmn.Core.Backgammon;
 using BckGmmn.Core.Common;
 
@@ -15,12 +16,12 @@ namespace BckGmmn.Core
 
             game.Start();
 
-            DiceValue p1 = default;
-            DiceValue p2 = default;
+            Cast p1 = default;
+            Cast p2 = default;
             while (p1 == p2)
             {
-                p1 = game.PlayerA.DiceSet.Dice1.Roll();
-                p2 = game.PlayerB.DiceSet.Dice1.Roll();
+                p1 = game.PlayerA.Dice.Dice1.Roll();
+                p2 = game.PlayerB.Dice.Dice1.Roll();
             }
 
             game.Turn = p1 > p2 ? PlayerId.PlayerA : PlayerId.PlayerB;
@@ -31,22 +32,28 @@ namespace BckGmmn.Core
                 {
                     case PlayerId.PlayerA:
                     {
-                        if (game.PlayerA.CanMove())
-                        {
-                            var moves = game.PlayerA.GetAvailableMoves();
-                        }
+                        MovePlayer(game.PlayerA);
                         break;
                     }
                     case PlayerId.PlayerB:
                     {
-                        if (game.PlayerB.CanMove())
-                        {
-
-                        }
+                        MovePlayer(game.PlayerB);
                         break;
                     }
                     default:
                         throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            void MovePlayer(IPlayer player)
+            {
+                if (player.CanMove())
+                {
+                    var moves = player.GetAvailableMoves();
+                    if (moves.Any())
+                    {
+                        moves.First().Apply();
+                    }
                 }
             }
 
@@ -68,7 +75,7 @@ namespace BckGmmn.Core
 
             game.Abort();
 
-            IPlayer GetPlayer() => new Player(new DiceSet(new Dice(generator), new Dice(generator)));
+            IPlayer GetPlayer() => new Player(new Dice(new Die(generator), new Die(generator)));
         }
     }
 }

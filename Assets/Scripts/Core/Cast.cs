@@ -2,13 +2,13 @@
 
 namespace BckGmmn.Core
 {
-    public struct DiceValue : IEquatable<DiceValue>, IComparable<DiceValue>
+    public struct Cast : IEquatable<Cast>, IComparable<Cast>
     {
-        public DiceValue(int value)
+        public Cast(int value)
         {
             if (value is < 1 or > 6)
                 throw new ArgumentOutOfRangeException(nameof(value), value,
-                    "Dice value must be between 1 and 6");
+                    "Die value must be between 1 and 6");
             Value = value;
         }
 
@@ -27,19 +27,19 @@ namespace BckGmmn.Core
             _ => null
         };
 
-        public bool Equals(DiceValue other)
+        public bool Equals(Cast other)
         {
             return Value.Equals(other.Value);
         }
 
-        public int CompareTo(DiceValue other)
+        public int CompareTo(Cast other)
         {
             return Value.CompareTo(other.Value);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is DiceValue dv && Equals(dv);
+            return obj is Cast dv && Equals(dv);
         }
 
         public override int GetHashCode()
@@ -54,21 +54,24 @@ namespace BckGmmn.Core
             return "NoValue";
         }
 
-        public static bool operator ==(DiceValue left, DiceValue right)
+        public static explicit operator Cast(int value) => new Cast(value);
+        public static implicit operator int(Cast value) => value.Value;
+
+        public static bool operator ==(Cast left, Cast right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(DiceValue left, DiceValue right)
+        public static bool operator !=(Cast left, Cast right)
         {
             return left.Equals(right) is false;
         }
 
-        public static bool operator >(DiceValue left, DiceValue right)
+        public static bool operator >(Cast left, Cast right)
         {
             return left.CompareTo(right) == 1;
         }
-        public static bool operator <(DiceValue left, DiceValue right)
+        public static bool operator <(Cast left, Cast right)
         {
             return left.CompareTo(right) == -1;
         }

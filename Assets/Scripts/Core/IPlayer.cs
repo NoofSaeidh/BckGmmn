@@ -5,8 +5,8 @@ namespace BckGmmn.Core
 {
     public interface IPlayer
     {
-        IDiceSet DiceSet { get; }
+        IDice Dice { get; }
         bool CanMove();
-        IReadOnlyList<Move> GetAvailableMoves();
+        IReadOnlyList<AvailableMove> GetAvailableMoves();
     }
 }
