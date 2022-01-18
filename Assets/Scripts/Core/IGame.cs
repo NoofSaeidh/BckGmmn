@@ -1,4 +1,7 @@
-﻿namespace BckGmmn.Core
+﻿using System.Collections.Generic;
+using BckGmmn.Core.Common;
+
+namespace BckGmmn.Core
 {
     public interface IGame
     {
@@ -8,10 +11,14 @@
         PlayerId Turn { get; set; }
         PlayerId Winner { get; }
         IBoard Board { get; }
+        IRules Rules { get; }
+        AllMoves AllMoves { get; }
 
 
         // void Initialize();
         void Start();
         void Abort();
+
+        bool CanMove(PlayerId player, CheckerContainer start, CheckerContainer end);
     }
 }

@@ -6,30 +6,62 @@ using System.Threading.Tasks;
 
 namespace BckGmmn.Core
 {
-    public struct PointIndex : IEquatable<PointIndex>, IComparable<PointIndex>
+    public readonly struct PointIndex : IEquatable<PointIndex>, IComparable<PointIndex>
     {
+        public static readonly PointIndex Bar = new PointIndex(Constants.BarIndex);
+        public static readonly PointIndex BorneOff = new PointIndex(Constants.BorneOffIndex);
+
+        public static readonly PointIndex PointA1 = new PointIndex(Core.QuadrantIndex.A, 1);
+        public static readonly PointIndex PointA2 = new PointIndex(Core.QuadrantIndex.A, 2);
+        public static readonly PointIndex PointA3 = new PointIndex(Core.QuadrantIndex.A, 3);
+        public static readonly PointIndex PointA4 = new PointIndex(Core.QuadrantIndex.A, 4);
+        public static readonly PointIndex PointA5 = new PointIndex(Core.QuadrantIndex.A, 5);
+        public static readonly PointIndex PointA6 = new PointIndex(Core.QuadrantIndex.A, 6);
+        
+        public static readonly PointIndex PointB1 = new PointIndex(Core.QuadrantIndex.B, 1);
+        public static readonly PointIndex PointB2 = new PointIndex(Core.QuadrantIndex.B, 2);
+        public static readonly PointIndex PointB3 = new PointIndex(Core.QuadrantIndex.B, 3);
+        public static readonly PointIndex PointB4 = new PointIndex(Core.QuadrantIndex.B, 4);
+        public static readonly PointIndex PointB5 = new PointIndex(Core.QuadrantIndex.B, 5);
+        public static readonly PointIndex PointB6 = new PointIndex(Core.QuadrantIndex.B, 6);
+        
+        public static readonly PointIndex PointC1 = new PointIndex(Core.QuadrantIndex.C, 1);
+        public static readonly PointIndex PointC2 = new PointIndex(Core.QuadrantIndex.C, 2);
+        public static readonly PointIndex PointC3 = new PointIndex(Core.QuadrantIndex.C, 3);
+        public static readonly PointIndex PointC4 = new PointIndex(Core.QuadrantIndex.C, 4);
+        public static readonly PointIndex PointC5 = new PointIndex(Core.QuadrantIndex.C, 5);
+        public static readonly PointIndex PointC6 = new PointIndex(Core.QuadrantIndex.C, 6);
+        
+        public static readonly PointIndex PointD1 = new PointIndex(Core.QuadrantIndex.D, 1);
+        public static readonly PointIndex PointD2 = new PointIndex(Core.QuadrantIndex.D, 2);
+        public static readonly PointIndex PointD3 = new PointIndex(Core.QuadrantIndex.D, 3);
+        public static readonly PointIndex PointD4 = new PointIndex(Core.QuadrantIndex.D, 4);
+        public static readonly PointIndex PointD5 = new PointIndex(Core.QuadrantIndex.D, 5);
+        public static readonly PointIndex PointD6 = new PointIndex(Core.QuadrantIndex.D, 6);
+
         public PointIndex(int index)
         {
-            if (index is < Constants.PointsMinIndex or > Constants.PointsCount)
+            if (index is (< Constants.PointsMinIndex or > Constants.PointsCount)
+                      and not Constants.BarIndex and not Constants.BorneOffIndex)
                 throw new ArgumentOutOfRangeException(nameof(index));
 
             Index = index;
         }
 
-        public PointIndex(Quadrant quadrant, int quadrantIndex)
+        public PointIndex(QuadrantIndex quadrant, int indexInQuadrant)
         {
-            if (quadrant is < Quadrant.A or > Quadrant.D)
+            if (quadrant is < Core.QuadrantIndex.A or > Core.QuadrantIndex.D)
                 throw new ArgumentOutOfRangeException(nameof(quadrant));
-            if (quadrantIndex is < Constants.PointsMinIndex or > Constants.PointsCountInQuadrant)
-                throw new ArgumentOutOfRangeException(nameof(quadrantIndex));
-            Index = (int)quadrant * quadrantIndex;
+            if (indexInQuadrant is < Constants.PointsMinIndex or > Constants.PointsCountInQuadrant)
+                throw new ArgumentOutOfRangeException(nameof(indexInQuadrant));
+            Index = (int)quadrant * indexInQuadrant;
         }
 
         public int Index { get; }
 
-        public Quadrant Quadrant => (Quadrant)(Index % 4);
+        public QuadrantIndex Quadrant => (QuadrantIndex)(Index % 4);
 
-        public int QuadrantIndex => Index / 4;
+        public int IndexInQuadrant => Index / 4;
 
         public bool Equals(PointIndex other)
         {
@@ -53,7 +85,7 @@ namespace BckGmmn.Core
 
         public override string ToString()
         {
-            return $"{Index}, {nameof(Quadrant)}: {Quadrant}, {nameof(QuadrantIndex)}: {QuadrantIndex}";
+            return $"{Index}, {nameof(Quadrant)}: {Quadrant}, {nameof(IndexInQuadrant)}: {IndexInQuadrant}";
         }
 
         public static explicit operator PointIndex(int value) => new PointIndex(value);
@@ -79,7 +111,7 @@ namespace BckGmmn.Core
         }
     }
 
-    public enum Quadrant
+    public enum QuadrantIndex
     {
         Undefined = 0,
         A = 1,

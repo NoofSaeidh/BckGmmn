@@ -8,21 +8,28 @@ namespace BckGmmn.Core
 {
     public class Checker
     {
-        private CheckerContainer _container;
-        public Point Point => _container as Point;
-        public bool IsOnTheBar => _container is Bar;
-        public bool IsBorneOff => _container is BorneOff;
+
+        public Checker(PlayerId player)
+        {
+            Player = player;
+        }
+
+        public CheckerContainer Container { get; private set; }
+        public Point Point => Container as Point;
+        public bool IsOnTheBar => Container is Bar;
+        public bool IsBorneOff => Container is BorneOff;
+        public PlayerId Player { get; }
 
         public void MoveTo(CheckerContainer container)
         {
-            _container.RemoveInternal(this);
+            Container.RemoveInternal(this);
             MoveToInternal(container);
-            _container.AddInternal(this);
+            Container.AddInternal(this);
         }
 
         internal void MoveToInternal(CheckerContainer container)
         {
-            _container = container;
+            Container = container;
         }
     }
 }

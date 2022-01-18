@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BckGmmn.Core
+namespace BckGmmn.Core.Common
 {
-    // represents the full move with ALL dice
-    public struct AvailableMove
+    public class CheckerMove : ICheckerMove
     {
-        public AvailableMove(CheckerContainer start, CheckerContainer end)
+        public CheckerMove(CheckerContainer start, CheckerContainer end)
         {
             Start = start;
             End = end;
@@ -14,8 +16,6 @@ namespace BckGmmn.Core
 
         public CheckerContainer Start { get; }
         public CheckerContainer End { get; }
-
-        // todo: intermediate steps
 
         public void Apply()
         {

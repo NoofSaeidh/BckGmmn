@@ -7,9 +7,12 @@ namespace BckGmmn.Core
 {
     internal static class Program
     {
+        // todo: optimize foreaches
+
         // just for check
         internal static void Main()
         {
+
             var generator = new SystemRandomDiceValueGenerator();
 
             var game = new BackgammonGame(GetPlayer(), GetPlayer()) as IGame;
@@ -50,9 +53,13 @@ namespace BckGmmn.Core
                 if (player.CanMove())
                 {
                     var moves = player.GetAvailableMoves();
-                    if (moves.Any())
+                    foreach (var move in moves)
                     {
-                        moves.First().Apply();
+                        if (move.IsAvailableFor())
+                        {
+                            move.Apply();
+                            break;
+                        }
                     }
                 }
             }
