@@ -1,4 +1,5 @@
 ﻿using System;
+using BckGmmn.Core.Helpers;
 
 namespace BckGmmn.Core.Common
 {
@@ -37,10 +38,7 @@ namespace BckGmmn.Core.Common
 
         public PointIndex(int index)
         {
-            if (index is (< Constants.PointsMinIndex or > Constants.PointsCount)
-                      and not Constants.BarIndex and not Constants.BorneOffIndex)
-                throw new ArgumentOutOfRangeException(nameof(index));
-
+            ConstantsHelper.CheckContainerIndexRange(index);
             Index = index;
         }
 

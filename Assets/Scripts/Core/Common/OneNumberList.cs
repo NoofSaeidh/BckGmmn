@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace BckGmmn.Core.Common
 {
+    // just in case
     public struct OneNumberList
     {
         private long _value;
@@ -31,7 +32,7 @@ namespace BckGmmn.Core.Common
             if (value >= Base || value < 0)
                 throw new ArgumentOutOfRangeException(nameof(value));
 
-            _value = _value + (long)(value * Math.Pow(Base, Count++));
+            _value += (long)(value * Math.Pow(Base, Count++));
         }
 
         public struct Iterator

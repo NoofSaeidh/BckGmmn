@@ -15,6 +15,14 @@ namespace BckGmmn.Core.DefaultImplementations
             Points = points;
         }
 
+        public IReadOnlyCollection<Checker> Checkers { get; }
+        public IReadOnlyDictionary<PointIndex, CheckerContainer> Containers { get; }
         public IReadOnlyCollection<Point> Points { get; }
+        public Bar Bar { get; }
+        public BorneOff BorneOff { get; }
+        public void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

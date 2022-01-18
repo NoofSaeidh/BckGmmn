@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BckGmmn.Assets.Scripts.Core.Common;
 using BckGmmn.Core.Common;
 
 namespace BckGmmn.Core
@@ -11,6 +12,6 @@ namespace BckGmmn.Core
         IQuadrant OpponentHome { get; }
         IReadOnlyCollection<Checker> Checkers { get; }
         bool CanMove();
-        MovesSlice GetAvailableMoves();
+        AllMovesSlice GetAvailableMoves();
     }
 }

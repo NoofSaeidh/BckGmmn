@@ -31,6 +31,11 @@ namespace BckGmmn.Core.Backgammon
             }
         }
 
+        public PlayerId Winner { get; }
+        public IBoard Board { get; }
+        public IRules Rules { get; }
+        public AllMoves AllMoves { get; }
+
         public void Start()
         {
             GameState = GameState.InProcess;
@@ -40,6 +45,11 @@ namespace BckGmmn.Core.Backgammon
         {
             GameState = GameState.Finished;
             _turn = PlayerId.Undefined;
+        }
+
+        public bool CanMove(PlayerId player, CheckerContainer start, CheckerContainer end)
+        {
+            throw new NotImplementedException();
         }
 
         // public void Initialize()

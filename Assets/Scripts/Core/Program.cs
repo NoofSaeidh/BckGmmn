@@ -55,7 +55,7 @@ namespace BckGmmn.Core
                     var moves = player.GetAvailableMoves();
                     foreach (var move in moves)
                     {
-                        if (move.IsAvailableFor())
+                        if (move.IsAvailableFor(player.PlayerId))
                         {
                             move.Apply();
                             break;
@@ -82,7 +82,7 @@ namespace BckGmmn.Core
 
             game.Abort();
 
-            IPlayer GetPlayer() => new Player(new Dice(new Die(generator), new Die(generator)));
+            IPlayer GetPlayer() => null; /*new Player(new Dice(new Die(generator), new Die(generator)));*/
         }
     }
 }

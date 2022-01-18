@@ -6,6 +6,9 @@ namespace BckGmmn.Core.DefaultImplementations
 {
     public class CheckerMove : ICheckerMove
     {
+        private PointIndex _start;
+        private PointIndex _end;
+
         public CheckerMove(CheckerContainer start, CheckerContainer end)
         {
             Start = start;
@@ -13,7 +16,17 @@ namespace BckGmmn.Core.DefaultImplementations
         }
 
         public CheckerContainer Start { get; }
+
+        PointIndex ICheckerMove.End => _end;
+
+        PointIndex ICheckerMove.Start => _start;
+
         public CheckerContainer End { get; }
+
+        public bool Available()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Apply()
         {

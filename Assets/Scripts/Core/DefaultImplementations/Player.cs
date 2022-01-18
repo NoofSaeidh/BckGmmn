@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BckGmmn.Assets.Scripts.Core.Common;
 using BckGmmn.Core.Common;
 
 namespace BckGmmn.Core.DefaultImplementations
@@ -45,27 +46,19 @@ namespace BckGmmn.Core.DefaultImplementations
             return true;
         }
 
-        public unsafe MovesSlice GetAvailableMoves()
+        public AllMovesSlice GetAvailableMoves()
         {
-            // hack to avoid allocations for list
-            long indexes = 0;
-            int count = 0;
-            for (var index = 1; index <= _game.AllMoves.Count; index++)
+            var slice = new AllMovesSlice(_game.AllMoves);
+            for (var index = 0; index <= _game.AllMoves.Count; index++)
             {
                 var move = _game.AllMoves[index];
                 if (move.IsAvailableFor(PlayerId))
                 {
-                    indexes += index * _game.AllMoves.Count;
-                    count++;
+                    slice.AddAt(index);
                 }
             }
 
-            Span<int> ar = stackalloc int[count];
-            for (int i = 0; i < count; i++)
-            {
-                ar[i] = (int)(indexes % _game.AllMoves.Count);
-            }
-            return new MovesSlice(_game.AllMoves, stackalloc int[2]{1,2});
+            return slice;
         }
     }
 }
