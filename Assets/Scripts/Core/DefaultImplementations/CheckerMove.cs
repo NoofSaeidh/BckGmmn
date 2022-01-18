@@ -1,0 +1,26 @@
+﻿using System;
+using System.Linq;
+using BckGmmn.Core.Common;
+
+namespace BckGmmn.Core.DefaultImplementations
+{
+    public class CheckerMove : ICheckerMove
+    {
+        public CheckerMove(CheckerContainer start, CheckerContainer end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public CheckerContainer Start { get; }
+        public CheckerContainer End { get; }
+
+        public void Apply()
+        {
+            var checker = Start.Checkers.FirstOrDefault();
+            if (checker is null)
+                throw new InvalidOperationException("Start container doesn't contain checkers");
+            checker.MoveTo(End);
+        }
+    }
+}

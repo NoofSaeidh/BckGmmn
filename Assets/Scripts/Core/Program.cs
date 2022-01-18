@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using BckGmmn.Core.Backgammon;
 using BckGmmn.Core.Common;
+using BckGmmn.Core.DefaultImplementations;
 
 namespace BckGmmn.Core
 {

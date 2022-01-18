@@ -1,4 +1,6 @@
-﻿namespace BckGmmn.Core
+﻿using BckGmmn.Core.Common;
+
+namespace BckGmmn.Core
 {
     public interface IDice
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BckGmmn.Core.Common;
 
 namespace BckGmmn.Core
 {
