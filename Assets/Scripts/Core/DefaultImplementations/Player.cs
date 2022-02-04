@@ -7,13 +7,13 @@ namespace BckGmmn.Core.DefaultImplementations
 {
     public class Player : IPlayer
     {
-        private readonly IGame _game;
+        // cannot set in constructor because of circular reference
+        internal IGame _game;
 
-        public Player(PlayerId playerId, IDice dice, IGame game, IQuadrant home, IQuadrant opponentHome, IReadOnlyCollection<Checker> checkers)
+        public Player(PlayerId playerId, IDice dice, IQuadrant home, IQuadrant opponentHome, IReadOnlyCollection<Checker> checkers)
         {
             PlayerId = playerId;
             Dice = dice;
-            _game = game;
             Home = home;
             OpponentHome = opponentHome;
             Checkers = checkers;

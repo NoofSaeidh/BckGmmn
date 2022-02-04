@@ -15,7 +15,14 @@ namespace BckGmmn.Core
 
             var generator = new SystemRandomDiceValueGenerator();
 
-            var game = new BackgammonGame(GetPlayer(), GetPlayer()) as IGame;
+            IGame game = new BackgammonGame(
+                GetPlayer(PlayerId.PlayerA, QuadrantIndex.A, QuadrantIndex.D),
+                GetPlayer(PlayerId.PlayerB, QuadrantIndex.D, QuadrantIndex.A),
+                null,
+                null,
+                null);
+            (game.PlayerA as Player)._game = game;
+            (game.PlayerB as Player)._game = game;
 
             game.Start();
 
@@ -31,6 +38,7 @@ namespace BckGmmn.Core
 
             while (game.GameState == GameState.InProcess)
             {
+                Console.WriteLine($"Player {game.Turn} turn.");
                 switch (game.Turn)
                 {
                     case PlayerId.PlayerA:
@@ -48,6 +56,8 @@ namespace BckGmmn.Core
                 }
             }
 
+            Console.WriteLine($"Player {game.Winner} won!");
+
             void MovePlayer(IPlayer player)
             {
                 if (player.CanMove())
@@ -57,10 +67,15 @@ namespace BckGmmn.Core
                     {
                         if (move.IsAvailableFor(player.PlayerId))
                         {
+                            Console.WriteLine($"Player {player} moves {move}.");
                             move.Apply();
                             break;
                         }
                     }
+                }
+                else
+                {
+                    Console.WriteLine($"Player {player} cannot move.");
                 }
             }
 
@@ -82,7 +97,12 @@ namespace BckGmmn.Core
 
             game.Abort();
 
-            IPlayer GetPlayer() => null; /*new Player(new Dice(new Die(generator), new Die(generator)));*/
+            IPlayer GetPlayer(PlayerId player, QuadrantIndex homeQuadrant, QuadrantIndex opponentHomeQuadrant) => new Player(
+                player,
+                new Dice(new Die(generator), new Die(generator)),
+                new Quadrant(homeQuadrant, null),
+                new Quadrant(opponentHomeQuadrant, null),
+                null);
         }
     }
 }

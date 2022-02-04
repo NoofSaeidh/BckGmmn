@@ -59,6 +59,7 @@ namespace BckGmmn.Assets.Scripts.Core.Common
                 get
                 {
                     var value = _nextValue % _base;
+                    // todo: move calc to move next
                     _nextValue /= _base;
                     return _listSlice._allMoves[(int)value];
                 }

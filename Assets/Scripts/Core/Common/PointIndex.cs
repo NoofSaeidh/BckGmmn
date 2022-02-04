@@ -5,36 +5,36 @@ namespace BckGmmn.Core.Common
 {
     public readonly struct PointIndex : IEquatable<PointIndex>, IComparable<PointIndex>
     {
-        public static readonly PointIndex Bar = new PointIndex(Constants.BarIndex);
-        public static readonly PointIndex BorneOff = new PointIndex(Constants.BorneOffIndex);
+        public static readonly PointIndex Bar = new (Constants.BarIndex);
+        public static readonly PointIndex BorneOff = new (Constants.BorneOffIndex);
 
-        public static readonly PointIndex PointA1 = new PointIndex(QuadrantIndex.A, 1);
-        public static readonly PointIndex PointA2 = new PointIndex(QuadrantIndex.A, 2);
-        public static readonly PointIndex PointA3 = new PointIndex(QuadrantIndex.A, 3);
-        public static readonly PointIndex PointA4 = new PointIndex(QuadrantIndex.A, 4);
-        public static readonly PointIndex PointA5 = new PointIndex(QuadrantIndex.A, 5);
-        public static readonly PointIndex PointA6 = new PointIndex(QuadrantIndex.A, 6);
+        public static readonly PointIndex PointA1 = new (QuadrantIndex.A, 1);
+        public static readonly PointIndex PointA2 = new (QuadrantIndex.A, 2);
+        public static readonly PointIndex PointA3 = new (QuadrantIndex.A, 3);
+        public static readonly PointIndex PointA4 = new (QuadrantIndex.A, 4);
+        public static readonly PointIndex PointA5 = new (QuadrantIndex.A, 5);
+        public static readonly PointIndex PointA6 = new (QuadrantIndex.A, 6);
         
-        public static readonly PointIndex PointB1 = new PointIndex(QuadrantIndex.B, 1);
-        public static readonly PointIndex PointB2 = new PointIndex(QuadrantIndex.B, 2);
-        public static readonly PointIndex PointB3 = new PointIndex(QuadrantIndex.B, 3);
-        public static readonly PointIndex PointB4 = new PointIndex(QuadrantIndex.B, 4);
-        public static readonly PointIndex PointB5 = new PointIndex(QuadrantIndex.B, 5);
-        public static readonly PointIndex PointB6 = new PointIndex(QuadrantIndex.B, 6);
+        public static readonly PointIndex PointB1 = new (QuadrantIndex.B, 1);
+        public static readonly PointIndex PointB2 = new (QuadrantIndex.B, 2);
+        public static readonly PointIndex PointB3 = new (QuadrantIndex.B, 3);
+        public static readonly PointIndex PointB4 = new (QuadrantIndex.B, 4);
+        public static readonly PointIndex PointB5 = new (QuadrantIndex.B, 5);
+        public static readonly PointIndex PointB6 = new (QuadrantIndex.B, 6);
         
-        public static readonly PointIndex PointC1 = new PointIndex(QuadrantIndex.C, 1);
-        public static readonly PointIndex PointC2 = new PointIndex(QuadrantIndex.C, 2);
-        public static readonly PointIndex PointC3 = new PointIndex(QuadrantIndex.C, 3);
-        public static readonly PointIndex PointC4 = new PointIndex(QuadrantIndex.C, 4);
-        public static readonly PointIndex PointC5 = new PointIndex(QuadrantIndex.C, 5);
-        public static readonly PointIndex PointC6 = new PointIndex(QuadrantIndex.C, 6);
+        public static readonly PointIndex PointC1 = new (QuadrantIndex.C, 1);
+        public static readonly PointIndex PointC2 = new (QuadrantIndex.C, 2);
+        public static readonly PointIndex PointC3 = new (QuadrantIndex.C, 3);
+        public static readonly PointIndex PointC4 = new (QuadrantIndex.C, 4);
+        public static readonly PointIndex PointC5 = new (QuadrantIndex.C, 5);
+        public static readonly PointIndex PointC6 = new (QuadrantIndex.C, 6);
         
-        public static readonly PointIndex PointD1 = new PointIndex(QuadrantIndex.D, 1);
-        public static readonly PointIndex PointD2 = new PointIndex(QuadrantIndex.D, 2);
-        public static readonly PointIndex PointD3 = new PointIndex(QuadrantIndex.D, 3);
-        public static readonly PointIndex PointD4 = new PointIndex(QuadrantIndex.D, 4);
-        public static readonly PointIndex PointD5 = new PointIndex(QuadrantIndex.D, 5);
-        public static readonly PointIndex PointD6 = new PointIndex(QuadrantIndex.D, 6);
+        public static readonly PointIndex PointD1 = new (QuadrantIndex.D, 1);
+        public static readonly PointIndex PointD2 = new (QuadrantIndex.D, 2);
+        public static readonly PointIndex PointD3 = new (QuadrantIndex.D, 3);
+        public static readonly PointIndex PointD4 = new (QuadrantIndex.D, 4);
+        public static readonly PointIndex PointD5 = new (QuadrantIndex.D, 5);
+        public static readonly PointIndex PointD6 = new (QuadrantIndex.D, 6);
 
         public PointIndex(int index)
         {
@@ -82,7 +82,7 @@ namespace BckGmmn.Core.Common
             return $"{Index}, {nameof(Quadrant)}: {Quadrant}, {nameof(IndexInQuadrant)}: {IndexInQuadrant}";
         }
 
-        public static explicit operator PointIndex(int value) => new PointIndex(value);
+        public static explicit operator PointIndex(int value) => new (value);
         public static implicit operator int(PointIndex value) => value.Index;
 
         public static bool operator ==(PointIndex left, PointIndex right)
@@ -103,14 +103,5 @@ namespace BckGmmn.Core.Common
         {
             return left.CompareTo(right) == -1;
         }
-    }
-
-    public enum QuadrantIndex
-    {
-        Undefined = 0,
-        A = 1,
-        B = 2,
-        C = 3,
-        D = 4
     }
 }

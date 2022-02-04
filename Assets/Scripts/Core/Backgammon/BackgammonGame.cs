@@ -6,11 +6,15 @@ namespace BckGmmn.Core.Backgammon
     public class BackgammonGame : IGame
     {
         private PlayerId _turn;
-        public BackgammonGame(IPlayer player1, IPlayer player2)
+        public BackgammonGame(IPlayer playerA, IPlayer playerB, IBoard board, IRules rules, AllMoves allMoves)
         {
-            PlayerA = player1;
-            PlayerB = player2;
+            PlayerA = playerA;
+            PlayerB = playerB;
+            Board = board;
+            Rules = rules;
+            AllMoves = allMoves;
             _turn = PlayerId.Undefined;
+            Winner = PlayerId.Undefined;
         }
 
         public IPlayer PlayerA { get; }
