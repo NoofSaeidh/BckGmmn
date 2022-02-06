@@ -1,12 +1,16 @@
 ﻿using System;
 using BckGmmn.Core.Common;
+using Zenject;
 
 namespace BckGmmn.Core.Backgammon
 {
     public class BackgammonGame : IGame
     {
         private PlayerId _turn;
-        public BackgammonGame(IPlayer playerA, IPlayer playerB, IBoard board, IRules rules, AllMoves allMoves)
+        public BackgammonGame(
+            [Inject(Id = PlayerId.PlayerA)] IPlayer playerA,
+            [Inject(Id = PlayerId.PlayerB)] IPlayer playerB,
+            IBoard board, IRules rules, AllMoves allMoves)
         {
             PlayerA = playerA;
             PlayerB = playerB;

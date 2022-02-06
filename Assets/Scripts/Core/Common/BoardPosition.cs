@@ -12,11 +12,6 @@ namespace BckGmmn.Core.Common
         private long _playerB;
         private const int _Base = Constants.MaxPlayerCheckersCount;
         private const int _Count = Constants.ContainersCount;
-        public BoardPosition()
-        {
-            _playerA = 0;
-            _playerB = 0;
-        }
 
         public PointPosition this[PointIndex index]
         {
@@ -53,7 +48,7 @@ namespace BckGmmn.Core.Common
 
         public Iterator GetEnumerator() => new Iterator(this);
 
-        public IEnumerable<PointPosition> ToEnumerable()
+        public IEnumerable<KeyValuePair<PointIndex, PointPosition>> ToEnumerable()
         {
             foreach (var item in this)
             {
@@ -74,7 +69,7 @@ namespace BckGmmn.Core.Common
                 _nextB = position._playerB;
             }
 
-            public PointPosition Current
+            public KeyValuePair<PointIndex, PointPosition> Current
             {
                 get
                 {
@@ -83,7 +78,7 @@ namespace BckGmmn.Core.Common
                     _nextA /= _Base;
                     var b = _nextB % _Base;
                     _nextB /= _Base;
-                    return PointPosition.FromCounts((int)a,(int)b);
+                    return new (new PointIndex(_index), PointPosition.FromCounts((int)a,(int)b));
                 }
             }
             public bool MoveNext()

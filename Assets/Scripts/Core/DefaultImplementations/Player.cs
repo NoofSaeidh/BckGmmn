@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BckGmmn.Assets.Scripts.Core.Common;
 using BckGmmn.Core.Common;
+using BckGmmn.Core.Helpers;
 
 namespace BckGmmn.Core.DefaultImplementations
 {
@@ -10,19 +11,23 @@ namespace BckGmmn.Core.DefaultImplementations
         // cannot set in constructor because of circular reference
         internal IGame _game;
 
-        public Player(PlayerId playerId, IDice dice, IQuadrant home, IQuadrant opponentHome, IReadOnlyCollection<Checker> checkers)
+        public Player(PlayerId playerId, IDice dice,IReadOnlyCollection<Checker> checkers)
         {
             PlayerId = playerId;
             Dice = dice;
-            Home = home;
-            OpponentHome = opponentHome;
+            _homes = new Lazy<(IQuadrant home, IQuadrant opponent)>(() =>
+                (_game.Board.Quadrants[_game.Rules.HomeFor(playerId)],
+                _game.Board.Quadrants[_game.Rules.HomeForOpponent(playerId)]));
+
             Checkers = checkers;
         }
 
+        private Lazy<(IQuadrant home, IQuadrant opponent)> _homes;
+
         public PlayerId PlayerId { get; }
         public IDice Dice { get; }
-        public IQuadrant Home { get; }
-        public IQuadrant OpponentHome { get; }
+        public IQuadrant Home => _homes.Value.home;
+        public IQuadrant OpponentHome => _homes.Value.opponent;
         public IReadOnlyCollection<Checker> Checkers { get; }
 
         public bool CanMove()

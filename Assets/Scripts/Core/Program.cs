@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using BckGmmn.Core.Backgammon;
 using BckGmmn.Core.Common;
 using BckGmmn.Core.DefaultImplementations;
+
+[assembly: InternalsVisibleTo("BckGmmn.App")]
 
 namespace BckGmmn.Core
 {
@@ -100,8 +103,6 @@ namespace BckGmmn.Core
             IPlayer GetPlayer(PlayerId player, QuadrantIndex homeQuadrant, QuadrantIndex opponentHomeQuadrant) => new Player(
                 player,
                 new Dice(new Die(generator), new Die(generator)),
-                new Quadrant(homeQuadrant, null),
-                new Quadrant(opponentHomeQuadrant, null),
                 null);
         }
     }

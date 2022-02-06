@@ -2,7 +2,8 @@
     "name": "BckGmmn.App",
     "rootNamespace": "BckGmmn",
     "references": [
-        "GUID:7531149ad23075945ad150573c25e56c"
+        "GUID:7531149ad23075945ad150573c25e56c",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

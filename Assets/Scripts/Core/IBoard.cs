@@ -7,6 +7,7 @@ namespace BckGmmn.Core
     {
         IReadOnlyCollection<Checker> Checkers { get; }
         IReadOnlyCollection<Point> Points { get; }
+        IReadOnlyDictionary<QuadrantIndex, IQuadrant> Quadrants { get; }
         Bar Bar { get; }
         BorneOff BorneOff { get; }
 

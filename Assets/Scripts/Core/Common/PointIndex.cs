@@ -79,6 +79,11 @@ namespace BckGmmn.Core.Common
 
         public override string ToString()
         {
+            if (this == Bar)
+                return "Bar";
+            if (this == BorneOff)
+                return "Borne Off";
+
             return $"{Index}, {nameof(Quadrant)}: {Quadrant}, {nameof(IndexInQuadrant)}: {IndexInQuadrant}";
         }
 
