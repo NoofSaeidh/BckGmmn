@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using BckGmmn.Core.Backgammon;
 using BckGmmn.Core.Common;
 using BckGmmn.Core.DefaultImplementations;
+using Zenject;
 
 [assembly: InternalsVisibleTo("BckGmmn.App")]
 
@@ -24,8 +25,8 @@ namespace BckGmmn.Core
                 null,
                 null,
                 null);
-            (game.PlayerA as Player)._game = game;
-            (game.PlayerB as Player)._game = game;
+            //(game.PlayerA as Player).Game = game;
+            //(game.PlayerB as Player).Game = game;
 
             game.Start();
 
@@ -103,6 +104,7 @@ namespace BckGmmn.Core
             IPlayer GetPlayer(PlayerId player, QuadrantIndex homeQuadrant, QuadrantIndex opponentHomeQuadrant) => new Player(
                 player,
                 new Dice(new Die(generator), new Die(generator)),
+                null,
                 null);
         }
     }

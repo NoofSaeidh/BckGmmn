@@ -1,7 +1,10 @@
 {
     "name": "BckGmmn.Editor",
     "rootNamespace": "BckGmmn",
-    "references": [],
+    "references": [
+        "GUID:6a9036275d1965442bd4e02df27ec345",
+        "GUID:7531149ad23075945ad150573c25e56c"
+    ],
     "includePlatforms": [
         "Editor"
     ],

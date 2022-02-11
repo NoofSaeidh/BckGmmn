@@ -18,7 +18,6 @@ namespace BckGmmn.App.Containers
             Container.Bind<IDie>().To<Die>().AsSingle();
             Container.Bind<IDice>().To<Dice>().AsSingle();
             Container.Bind<ICheckerMove>().To<CheckerMove>().AsSingle();
-            Container.Bind<IFullMove>().To<FullMove>().AsSingle();
             Container.Bind<IRules>().To<BackgammonRules>().AsSingle();
             Container.Bind<IDiceValueGenerator>().To<SystemRandomDiceValueGenerator>().AsSingle();
 
@@ -31,8 +30,7 @@ namespace BckGmmn.App.Containers
                     .WithId(player)
                     .To<Player>()
                     .AsCached()
-                    .WithArguments(PlayerId.PlayerA)
-                    .OnInstantiated<Player>((ctx, pl) => pl._game = ctx.Container.Resolve<IGame>());
+                    .WithArguments(PlayerId.PlayerA);
             }
 
             BindQuadrant(QuadrantIndex.A);
@@ -57,6 +55,12 @@ namespace BckGmmn.App.Containers
                 .FromMethod(ctx => Board.GetCheckers(ctx.Container.Resolve<IRules>()));
             Container.Bind<IBoard>().To<Board>().AsSingle();
 
+            Container.Bind<IFullMove>().To<FullMove>();
+            Container.Bind<AllMoves>().FromMethod(ctx =>
+            {
+                var move = ctx.Container.Resolve<IFullMove>();
+                move
+            });
         }
     }
 }

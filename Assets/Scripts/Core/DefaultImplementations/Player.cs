@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using BckGmmn.Assets.Scripts.Core.Common;
 using BckGmmn.Core.Common;
 using BckGmmn.Core.Helpers;
+using Zenject;
 
 namespace BckGmmn.Core.DefaultImplementations
 {
     public class Player : IPlayer
     {
         // cannot set in constructor because of circular reference
-        internal IGame _game;
+        private readonly LazyInject<IGame> _game;
+        private readonly Lazy<(IQuadrant home, IQuadrant opponent)> _homes;
 
-        public Player(PlayerId playerId, IDice dice,IReadOnlyCollection<Checker> checkers)
+        public Player(PlayerId playerId, IDice dice, LazyInject<IGame> game, IReadOnlyCollection<Checker> checkers)
         {
             PlayerId = playerId;
             Dice = dice;
+            _game = game;
             _homes = new Lazy<(IQuadrant home, IQuadrant opponent)>(() =>
-                (_game.Board.Quadrants[_game.Rules.HomeFor(playerId)],
-                _game.Board.Quadrants[_game.Rules.HomeForOpponent(playerId)]));
+                (Game.Board.Quadrants[Game.Rules.HomeFor(playerId)],
+                Game.Board.Quadrants[Game.Rules.HomeForOpponent(playerId)]));
 
             Checkers = checkers;
         }
 
-        private Lazy<(IQuadrant home, IQuadrant opponent)> _homes;
+        internal IGame Game => _game.Value;
 
         public PlayerId PlayerId { get; }
         public IDice Dice { get; }
@@ -38,7 +41,7 @@ namespace BckGmmn.Core.DefaultImplementations
                 {
                     foreach (var point in OpponentHome.Points)
                     {
-                        if (_game.CanMove(PlayerId, checker.Container, point))
+                        if (Game.CanMove(PlayerId, checker.Container, point))
                         {
                             return true;
                         }
@@ -53,10 +56,10 @@ namespace BckGmmn.Core.DefaultImplementations
 
         public AllMovesSlice GetAvailableMoves()
         {
-            var slice = new AllMovesSlice(_game.AllMoves);
-            for (var index = 0; index <= _game.AllMoves.Count; index++)
+            var slice = new AllMovesSlice(Game.AllMoves);
+            for (var index = 0; index <= Game.AllMoves.Count; index++)
             {
-                var move = _game.AllMoves[index];
+                var move = Game.AllMoves[index];
                 if (move.IsAvailableFor(PlayerId))
                 {
                     slice.AddAt(index);

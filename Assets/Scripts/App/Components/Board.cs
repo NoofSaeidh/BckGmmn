@@ -13,9 +13,9 @@ namespace BckGmmn.App.Components
     {
         [Inject] private IBoard _board;
 
-        private void FixedUpdate()
-        {
+        //private void FixedUpdate()
+        //{
 
-        }
+        //}
     }
 }
